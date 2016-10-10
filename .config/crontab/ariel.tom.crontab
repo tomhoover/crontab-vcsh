@@ -1,0 +1,12 @@
+# min  hr  dom  mon  dow   command
+*/5 * * * * touch /Volumes/RAID10/.nosleep > /dev/null 2>&1
+
+@daily      ~/bin/getMovieList
+#@daily     ~/bin/rsyncBackup_daily
+
+#@weekly    ~/bin/rsyncBackup_weekly
+@weekly     /usr/local/bin/brew list > ~/.config/homebrew/brew.installed
+@weekly     /usr/local/bin/brew cask list > ~/.config/homebrew/cask.installed
+
+30 01 * * * /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || open file:///Users/tom/Library/Application\%20Support/SuperDuper\%21/Scheduled\%20Copies/Smart\%20Update\%20SD\%20backup\%20from\%20a.sdsp/Copy\%20Job.app
+30 02 * * 0 /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || open file:///Users/tom/Library/Application\%20Support/SuperDuper\%21/Scheduled\%20Copies/Smart\%20Update\%20SuperDuper\%20from\%20a.sdsp/Copy\%20Job.app
