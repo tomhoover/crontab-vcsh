@@ -3,6 +3,7 @@
 
 #@daily     ~/bin/rsyncBackup_daily
 @daily      ~/bin/getMovieList
+@daily      ~/bin/updateHostsFile.sh
 
 #@weekly    ~/bin/rsyncBackup_weekly
 @weekly     ~/bin/homebrewBackup_weekly.sh
