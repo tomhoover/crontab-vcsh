@@ -1,3 +1,6 @@
+LC_ALL=en_US.UTF-8
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+
 # min  hr  dom  mon  dow   command
 */5 * * * * touch /Volumes/RAID10/.nosleep > /dev/null 2>&1
 
