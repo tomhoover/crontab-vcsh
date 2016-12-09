@@ -6,7 +6,7 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 
 #@daily     ~/bin/rsyncBackup_daily
 @daily      ~/bin/getMovieList
-@daily      ~/bin/updateHostsFile.sh
+@daily      ~/bin/updateHostsFile.sh runfromcron
 
 #@weekly    ~/bin/rsyncBackup_weekly
 @weekly     ~/bin/homebrewBackup_weekly.sh
