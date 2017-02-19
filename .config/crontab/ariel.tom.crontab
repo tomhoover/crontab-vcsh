@@ -1,15 +1,19 @@
 LC_ALL=en_US.UTF-8
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/Users/tom/bin
 
 # min  hr  dom  mon  dow   command
-*/5 * * * * touch /Volumes/RAID10/.nosleep > /dev/null 2>&1
+*/5 * * * *     touch /Volumes/RAID10/.nosleep > /dev/null 2>&1
+5 0 * * 0,3     ~/bin/sync-annex.sh fsck
+5 0 * * 1,4     ~/bin/sync-annex.sh content
+5 0 * * 2,5     ~/bin/sync-annex.sh fsck remotes
+5 0 * * 6       ~/bin/sync-annex.sh all
 
-#@daily     ~/bin/rsyncBackup_daily
-@daily      ~/bin/getMovieList
-@daily      ~/bin/updateHostsFile.sh runfromcron
+#@daily         ~/bin/rsyncBackup_daily
+@daily          ~/bin/getMovieList
+@daily          ~/bin/updateHostsFile.sh runfromcron
 
-#@weekly    ~/bin/rsyncBackup_weekly
-@weekly     ~/bin/homebrewBackup_weekly.sh
+#@weekly        ~/bin/rsyncBackup_weekly
+@weekly         ~/bin/homebrewBackup_weekly.sh
 
 30 01 * * * /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || open file:///Users/tom/Library/Application\%20Support/SuperDuper\%21/Scheduled\%20Copies/Smart\%20Update\%20SD\%20backup\%20from\%20a.sdsp/Copy\%20Job.app
 30 02 * * 0 /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || open file:///Users/tom/Library/Application\%20Support/SuperDuper\%21/Scheduled\%20Copies/Smart\%20Update\%20SuperDuper\%20from\%20a.sdsp/Copy\%20Job.app
