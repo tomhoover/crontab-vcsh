@@ -1,0 +1,11 @@
+LC_ALL=en_US.UTF-8
+PATH=/mnt/cache/appdata/home/tom/git-annex.linux:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/mnt/cache/appdata/home/tom/bin
+
+# min hr dom mon      dow   command
+  5   1  *   *        0,3   ~/bin/sync-annex.sh content
+  5   1  *   1-5,7-11 1,4   ~/bin/sync-annex.sh fsck remotes fast
+  5   1  *   6,12     1,4   ~/bin/sync-annex.sh fsck remotes
+  5   1  *   1-5,7-11 2,6   ~/bin/sync-annex.sh fsck
+  5   1  *   6,12     2,6   ~/bin/sync-annex.sh fsck remotes
+  5   1  *   *        5     ~/bin/sync-annex.sh all
+#
