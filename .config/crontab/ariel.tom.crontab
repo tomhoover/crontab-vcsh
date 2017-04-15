@@ -10,6 +10,7 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/Users/tom/bin
 #@daily         ~/bin/rsyncBackup_daily
 @daily          ~/bin/getMovieList
 @daily          ~/bin/updateHostsFile.sh runfromcron
+@daily          for dir in $HOME/annex/*/ ; do cd "${dir}" && git annex list > "${dir%/}.txt" ; done
 
 #@weekly        ~/bin/rsyncBackup_weekly
 @weekly         ~/bin/homebrewBackup_weekly.sh
