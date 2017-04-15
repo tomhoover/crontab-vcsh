@@ -14,6 +14,7 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/Users/tom/bin
 
 #@weekly        ~/bin/rsyncBackup_weekly
 @weekly         ~/bin/homebrewBackup_weekly.sh
+@weekly         rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
 
 30 01 * * * /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || open file:///Users/tom/Library/Application\%20Support/SuperDuper\%21/Scheduled\%20Copies/Smart\%20Update\%20SD\%20backup\%20from\%20a.sdsp/Copy\%20Job.app
 30 02 * * 0 /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || open file:///Users/tom/Library/Application\%20Support/SuperDuper\%21/Scheduled\%20Copies/Smart\%20Update\%20SuperDuper\%20from\%20a.sdsp/Copy\%20Job.app
