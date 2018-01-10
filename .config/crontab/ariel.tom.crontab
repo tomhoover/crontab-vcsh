@@ -10,7 +10,7 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/Users/tom/bin
 #  5    0   *    *    6       ~/bin/sync-annex.sh all
 
 #@daily         ~/bin/rsyncBackup_daily
-@daily          ~/bin/getMovieList
+@daily          ~/bin/getMovieList.sh
 @daily          ~/bin/updateHostsFile.sh runfromcron
 #@daily          for dir in $HOME/annex/*/ ; do cd "${dir}" && git annex watch ; done
 #@daily          for dir in /Volumes/RAID10/annex/*/ ; do cd "${dir}" && git annex watch ; done
