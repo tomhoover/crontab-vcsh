@@ -3,12 +3,14 @@ LC_ALL=en_US.UTF-8
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/Users/tom/bin
 
 # min  hr  dom  mon  dow     command
-*/5   *   *    *    *       touch /Volumes/RAID10/.nosleep > /dev/null 2>&1
+#*/5   *   *    *    *       touch /Volumes/RAID10/.nosleep > /dev/null 2>&1
+#*/5   *   *    *    *       /usr/sbin/diskutil list | grep -e '.*RAID10.*' | sed 's/.*\(disk[0-9].*\)/\1/' | xargs -I{} /usr/sbin/diskutil mount {}
 #*/5   *   *    *    *       diskutil mount RAID10 > /dev/null 2>&1
 #  5    0   *    *    0,2,4   ~/bin/sync-annex.sh content && ~/bin/sync-annex.sh fsck
 #  5    0   *    *    1,3,5   ~/bin/sync-annex.sh content && ~/bin/sync-annex.sh fsck remotes
 #  5    0   *    *    6       ~/bin/sync-annex.sh all
 
+@hourly         ~/bin/duplicacy-backup.sh
 #@daily         ~/bin/rsyncBackup_daily
 @daily          ~/bin/getMovieList.sh
 @daily          ~/bin/updateHostsFile.sh runfromcron
@@ -22,5 +24,5 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/Users/tom/bin
 @weekly         rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
 
 #
-00	23	*	*	*	/Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || open file:///Users/tom/Library/Application\%20Support/SuperDuper\%21/Scheduled\%20Copies/Smart\%20Update\%20c\%20from\%20a.sdsp/Copy\%20Job.app
 #
+30	01	*	*	0	/Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/sdautomatedcopycontroller file:///Users/tom/Library/Application\%20Support/SuperDuper\!/Scheduled\%20Copies/Smart\%20Update\%20c\%20from\%20a.sdsp
