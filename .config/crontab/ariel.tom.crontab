@@ -11,7 +11,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/Users/tom/bin
 @reboot         zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m tank/RAID10
 @monthly        zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank/RAID10
 
-@hourly         duplicacy-backup.sh
+#@hourly         duplicacy-backup.sh
 @daily          getMovieList.sh
 @daily          updateHostsFile.sh runfromcron
 @daily          for dir in $HOME/Documents/FileThis\ Fetch/*/ ; do rmdir "${dir}" ; done
@@ -31,6 +31,5 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/Users/tom/bin
 #@daily          for dir in $HOME/annex/*/ ; do cd "${dir}" && git annex list > "${dir%/}.txt" ; done
 #@weekly        ~/bin/rsyncBackup_weekly
 
-## SuperDuper
 #
-30 22 * * *     /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/sdautomatedcopycontroller file:///Users/tom/Library/Application\%20Support/SuperDuper\!/Scheduled\%20Copies/Smart\%20Update\%20c\%20from\%20a.sdsp
+30	22	*	*	*	/Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/sdautomatedcopycontroller file:///Users/tom/Library/Application\%20Support/SuperDuper\!/Scheduled\%20Copies/Smart\%20Update\%20c\%20from\%20a.sdsp
