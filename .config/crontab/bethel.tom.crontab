@@ -1,14 +1,16 @@
 SHELL=/bin/bash
-PATH=/usr/local/bin:/bin:/usr/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 
-# min  hr  dom  mon  dow   command
-#*/10 * * * * mv ~/Dropbox/IFTTT/Gmail/Hoover_Tom__FAA__Calendar.ics ~/Dropbox/Public > /dev/null 2>&1
+#min hr dom mon dow command
 
-#@reboot $HOME/.dropbox-dist/dropboxd
-
-#@daily  ~/bin/diskAlert > /dev/null 2>&1
+@hourly export WANIP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 
 #@weekly apt-mark showauto > ~/.config/apt/pkgs_auto.lst
 #@weekly apt-mark showmanual > ~/.config/apt/pkgs_manual.lst
 #@weekly comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u) | grep -v ^linux-headers- > ~/.config/apt/installed
 @weekly dpkg --get-selections > ~/.config/apt/$HOSTNAME.package-selections
+
+## old
+#*/10 * * * * mv ~/Dropbox/IFTTT/Gmail/Hoover_Tom__FAA__Calendar.ics ~/Dropbox/Public > /dev/null 2>&1
+#@reboot $HOME/.dropbox-dist/dropboxd
+#@daily  ~/bin/diskAlert > /dev/null 2>&1

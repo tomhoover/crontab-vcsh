@@ -1,15 +1,15 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 
 # ZFS snapshots
-*/15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      pool/home
+*/15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      pool/home > /dev/null 2>&1
 @daily       root zfsnap.sh snapshot -rsSvz -p daily-   -a 3w      pool/home
 @weekly      root zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m      pool/home
 @reboot      root zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m      pool/home
 @monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever pool/home
 
 # ZFS cleanup snapshots
-@daily       root zfsnap.sh destroy -rsSv -F 2d -p 15min-                           pool/home
-@daily       root zfsnap.sh destroy -rsSv -F 2w -p daily-                           pool/home
-@daily       root zfsnap.sh destroy -rsSv -F 2m -p weekly- -p reboot-               pool/home
-@daily       root zfsnap.sh destroy -rsSv -F 6m -p monthly-                         pool/home
-@daily       root zfsnap.sh destroy -rsSv -p 15min- -p daily- -p weekly- -p reboot- pool/backups
+@daily       root zfsnap.sh destroy -rsSv -F 2d -p 15min-             pool/home
+@daily       root zfsnap.sh destroy -rsSv -F 2w -p daily-             pool/home
+@daily       root zfsnap.sh destroy -rsSv -F 2m -p weekly- -p reboot- pool/home
+@daily       root zfsnap.sh destroy -rsSv -F 6m -p monthly-           pool/home
+
