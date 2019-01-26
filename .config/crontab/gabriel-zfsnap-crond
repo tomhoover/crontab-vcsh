@@ -2,28 +2,34 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 
 # ZFS snapshots
 #  rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
-*/15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
-@daily       root zfsnap.sh snapshot -rsSvz -p daily-   -a 3w      rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
-@weekly      root zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m      rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
-@reboot      root zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m      rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
-@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
+*/15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
+@daily       root zfsnap.sh snapshot -rsSvz -p daily-   -a 3w      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
+@weekly      root zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
+@reboot      root zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
+@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank rpool/ROOT rpool/home rpool/var/cache                                  rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
 
-#  tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
-*/15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
-@daily       root zfsnap.sh snapshot -rsSvz -p daily-   -a 3w      tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
-@weekly      root zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m      tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
-@reboot      root zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m      tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
-@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
+##  tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
+#*/15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
+#@daily       root zfsnap.sh snapshot -rsSvz -p daily-   -a 3w      tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
+#@weekly      root zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m      tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
+#@reboot      root zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m      tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
+#@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
 
 # ZFS sync snapshots
-#@hourly      root syncoid --identifier=external --exclude=Music -r tank/RAID10 external/backups/RAID10
-#@hourly      root syncoid --identifier=gabriel -r tank/RAID10/Photos root@gabriel:tank/backups/ariel/photos
-#@hourly      root syncoid --identifier=gabriel -r tank/RAID10/Music root@gabriel:tank/backups/ariel/music
+@hourly      root simplesnap --host gabriel  --setname gabriel --store backups --local
+@hourly      root simplesnap --host gabriel  --setname gabriel --store backups --local --backupdataset rpool/var/lib/docker
+@hourly      root simplesnap --host ariel-wl --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
+@hourly      root simplesnap --host bethel   --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
+@hourly      root simplesnap --host proxmox  --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
 
 # ZFS cleanup snapshots
-@daily       root zfsnap.sh destroy -rsSv -F 2d -p 15min-             rpool tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
-@daily       root zfsnap.sh destroy -rsSv -F 2w -p daily-             rpool tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
-@daily       root zfsnap.sh destroy -rsSv -F 2m -p weekly- -p reboot- rpool tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
-@daily       root zfsnap.sh destroy -rsSv -F 6m -p monthly-           rpool tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
+@daily       root zfsnap.sh destroy -rsSv -F 2d -p 15min-             rpool tank
+@daily       root zfsnap.sh destroy -rsSv -F 2w -p daily-             rpool tank
+@daily       root zfsnap.sh destroy -rsSv -F 2m -p weekly- -p reboot- rpool tank
+@daily       root zfsnap.sh destroy -rsSv -F 6m -p monthly-           rpool tank
 
-@daily       root zfsnap.sh destroy -rsSv -p 15min- -p daily- -p weekly- -p reboot- tank/backups
+@daily       root zfsnap.sh destroy -rsSv       -p 15min- -p daily- -p weekly- -p reboot- backups
+
+# ZFS check
+@daily       root simplesnap --check "7 days ago"
+
