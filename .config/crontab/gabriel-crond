@@ -31,5 +31,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 @daily       root zfsnap.sh destroy -rsSv       -p 15min- -p daily- -p weekly- -p reboot- backups
 
 # ZFS check
-@daily       root simplesnap --setname gabriel --store backups --check "1 day ago"
+@daily       root simplesnap --host gabriel  --setname gabriel --store backups --check "1 day ago"
+@daily       root simplesnap --host ariel-wl --setname gabriel --store backups --check "1 day ago"
+#@daily       root simplesnap --host bethel   --setname gabriel --store backups --check "1 day ago"
+@daily       root simplesnap --host proxmox  --setname gabriel --store backups --check "1 day ago"
 
