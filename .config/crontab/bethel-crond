@@ -8,8 +8,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 #@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever pool rpool tank
 
 # ZFS sync snapshots
-0  * * * *   root simplesnap --host ariel-wl --setname bethel --store external/backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
-#15 * * * *   root simplesnap --host bethel   --setname bethel --store external/backups --local
+#0  * * * *   root simplesnap --host bethel   --setname bethel --store external/backups --local
+10 * * * *   root simplesnap --host ariel-wl --setname bethel --store external/backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
 25 * * * *   root simplesnap --host gabriel  --setname bethel --store external/backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
 40 * * * *   root simplesnap --host gabriel  --setname bethel --store external/backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap" --backupdataset rpool/var/lib/docker
 50 * * * *   root simplesnap --host proxmox  --setname bethel --store external/backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"

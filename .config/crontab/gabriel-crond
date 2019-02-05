@@ -23,10 +23,10 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 50 * * * *   root simplesnap --host proxmox  --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
 
 # ZFS cleanup snapshots
-@daily       root zfsnap.sh destroy -rsSv -F 2d -p 15min-             rpool tank
-@daily       root zfsnap.sh destroy -rsSv -F 2w -p daily-             rpool tank
-@daily       root zfsnap.sh destroy -rsSv -F 2m -p weekly- -p reboot- rpool tank
-@daily       root zfsnap.sh destroy -rsSv -F 6m -p monthly-           rpool tank
+@daily       root zfsnap.sh destroy -rsSv -F 2d -p 15min-             rpool tank > /dev/null 2>&1
+@daily       root zfsnap.sh destroy -rsSv -F 2w -p daily-             rpool tank > /dev/null 2>&1
+@daily       root zfsnap.sh destroy -rsSv -F 2m -p weekly- -p reboot- rpool tank > /dev/null 2>&1
+@daily       root zfsnap.sh destroy -rsSv -F 6m -p monthly-           rpool tank > /dev/null 2>&1
 
 @daily       root zfsnap.sh destroy -rsSv       -p 15min- -p daily- -p weekly- -p reboot- backups
 
