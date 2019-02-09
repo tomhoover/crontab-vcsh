@@ -3,10 +3,10 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 # ZFS snapshots
 #  rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
 */15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
-@daily       root zfsnap.sh snapshot -rsSvz -p daily-   -a 3w      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
-@weekly      root zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
-@reboot      root zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
-@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank rpool/ROOT rpool/home rpool/var/cache                                  rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
+@daily       root zfsnap.sh snapshot -rsSvz -p daily-   -a 3w      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
+@weekly      root zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
+@reboot      root zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
+@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank rpool/ROOT rpool/home rpool/var/cache                                  rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
 
 ##  tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
 #*/15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
@@ -16,7 +16,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 #@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
 
 # ZFS sync snapshots
-0  * * * *   root simplesnap --host gabriel  --setname gabriel --store backups --local
+00 * * * *   root simplesnap --host gabriel  --setname gabriel --store backups --local
 10 * * * *   root simplesnap --host gabriel  --setname gabriel --store backups --local --backupdataset rpool/var/lib/docker
 20 * * * *   root simplesnap --host ariel-wl --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
 35 * * * *   root simplesnap --host bethel   --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
@@ -31,8 +31,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 @daily       root zfsnap.sh destroy -rsSv       -p 15min- -p daily- -p weekly- -p reboot- backups
 
 # ZFS check
-@daily       root simplesnap --host gabriel  --setname gabriel --store backups --check "1 day ago"
 @daily       root simplesnap --host ariel-wl --setname gabriel --store backups --check "1 day ago"
-#@daily       root simplesnap --host bethel   --setname gabriel --store backups --check "1 day ago"
+@daily       root simplesnap --host bethel   --setname gabriel --store backups --check "1 day ago"
+@daily       root simplesnap --host gabriel  --setname gabriel --store backups --check "1 day ago"
 @daily       root simplesnap --host proxmox  --setname gabriel --store backups --check "1 day ago"
 

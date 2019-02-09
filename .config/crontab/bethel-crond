@@ -2,13 +2,13 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 
 ## ZFS snapshots
 #*/15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      pool rpool tank > /dev/null 2>&1
-#@daily       root zfsnap.sh snapshot -rsSvz -p daily-   -a 3w      pool rpool tank
-#@weekly      root zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m      pool rpool tank
-#@reboot      root zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m      pool rpool tank
-#@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever pool rpool tank
+#@daily       root zfsnap.sh snapshot -rsSvz -p daily-   -a 3w      pool rpool tank > /dev/null 2>&1
+#@weekly      root zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m      pool rpool tank > /dev/null 2>&1
+#@reboot      root zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m      pool rpool tank > /dev/null 2>&1
+#@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever pool rpool tank > /dev/null 2>&1
 
 # ZFS sync snapshots
-#0  * * * *   root simplesnap --host bethel   --setname bethel --store external/backups --local
+00 * * * *   root simplesnap --host bethel   --setname bethel --store external/backups --local
 10 * * * *   root simplesnap --host ariel-wl --setname bethel --store external/backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
 25 * * * *   root simplesnap --host gabriel  --setname bethel --store external/backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
 40 * * * *   root simplesnap --host gabriel  --setname bethel --store external/backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap" --backupdataset rpool/var/lib/docker
@@ -24,7 +24,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 
 # ZFS check
 @daily       root simplesnap --host ariel-wl --setname bethel --store external/backups --check "1 day ago"
-#@daily       root simplesnap --host bethel   --setname bethel --store external/backups --check "1 day ago"
+@daily       root simplesnap --host bethel   --setname bethel --store external/backups --check "1 day ago"
 @daily       root simplesnap --host gabriel  --setname bethel --store external/backups --check "1 day ago"
 @daily       root simplesnap --host proxmox  --setname bethel --store external/backups --check "1 day ago"
 
