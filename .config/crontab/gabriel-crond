@@ -1,5 +1,11 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 
+# cleanup old .lock files
+@hourly      root find /mnt/backups/ariel-wl/.lock -mtime +1 -type f -delete 2>&1
+@hourly      root find /mnt/backups/bethel/.lock -mtime +1 -type f -delete 2>&1
+@hourly      root find /mnt/backups/gabriel/.lock -mtime +1 -type f -delete 2>&1
+@hourly      root find /mnt/backups/proxmox/.lock -mtime +1 -type f -delete 2>&1
+
 # ZFS snapshots
 #  rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
 */15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
