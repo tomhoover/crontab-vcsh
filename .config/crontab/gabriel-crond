@@ -8,7 +8,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 
 # ZFS snapshots
 #  rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker
-*/15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
+#*/15 * * * * root zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
 @daily       root zfsnap.sh snapshot -rsSvz -p daily-   -a 3w      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
 @weekly      root zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
 @reboot      root zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m      tank rpool/ROOT rpool/home rpool/var/cache rpool/var/log rpool/var/snapraid rpool/var/spool -R rpool/var rpool/var/lib rpool/var/lib/docker > /dev/null 2>&1
