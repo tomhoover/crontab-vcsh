@@ -22,11 +22,11 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 #@monthly     root zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank/audio tank/downloads tank/git tank/images tank/resilio-sync tank/tmp tank/unraid tank/video tank/warehouse
 
 # ZFS sync snapshots
-00 * * * *   root simplesnap --host gabriel  --setname gabriel --store backups --local
-10 * * * *   root simplesnap --host ariel-wl --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
-20 * * * *   root simplesnap --host bethel   --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
-30 * * * *   root simplesnap --host proxmox  --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap"
-50 * * * *   root simplesnap --host gabriel  --setname gabriel --store backups --local --backupdataset rpool/var/lib/docker
+00 * * * *   root simplesnap --host gabriel  --setname gabriel --store backups --local 2>&1
+10 * * * *   root simplesnap --host ariel-wl --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap" 2>&1
+20 * * * *   root simplesnap --host bethel   --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap" 2>&1
+30 * * * *   root simplesnap --host proxmox  --setname gabriel --store backups --sshcmd "ssh -i /root/.ssh/id_rsa_simplesnap" 2>&1
+50 * * * *   root simplesnap --host gabriel  --setname gabriel --store backups --local --backupdataset rpool/var/lib/docker 2>&1
 
 # ZFS cleanup snapshots
 @daily       root zfsnap.sh destroy -rsSv -F 2d -p 15min-             rpool tank > /dev/null 2>&1
