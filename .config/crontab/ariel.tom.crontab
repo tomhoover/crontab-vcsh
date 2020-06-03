@@ -1,15 +1,17 @@
 SHELL=/bin/bash
 LC_ALL=en_US.UTF-8
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/Users/tom/bin
+PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # min hr dom mon dow command
 
-# ZFS snapshots
-*/15 * * * *    zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d tank/RAID10
-@daily          zfsnap.sh snapshot -rsSvz -p daily-   -a 3w tank/RAID10
-@weekly         zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m tank/RAID10
-@reboot         zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m tank/RAID10
-@monthly        zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank/RAID10
+## ZFS snapshots
+*/15 * * * *    zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d tank      > /dev/null 2>&1
+@daily          zfsnap.sh snapshot -rsSvz -p daily-   -a 3w tank      > /dev/null 2>&1
+@weekly         zfsnap.sh snapshot -rsSvz -p weekly-  -a 3m tank      > /dev/null 2>&1
+@reboot         zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m tank      > /dev/null 2>&1
+@monthly        zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank > /dev/null 2>&1
+
+@daily          python3 ~/.ansible/roles/proxmox/files/zfs-verify.py
 
 #@hourly         duplicacy-backup.sh
 @daily          getMovieList.sh
@@ -30,6 +32,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/Users/tom/bin
 #@daily          for dir in /Volumes/RAID10/annex/*/ ; do cd "${dir}" && git annex watch ; done
 #@daily          for dir in $HOME/annex/*/ ; do cd "${dir}" && git annex list > "${dir%/}.txt" ; done
 #@weekly        ~/bin/rsyncBackup_weekly
+# 0 0 * * Mon,Wed,Fri cd ~/data/software/python-github-backup && github-backup tomhoover --throttle-limit 100 --output-directory /Users/tom/data/software/python-github-backup/tomhoover --incremental --all --gists --starred-gists --private --prefer-ssh --keychain-name python-github-backup --keychain-account tomhoover
+# 0 0 * * Tue,Thu,Sat cd ~/data/software/python-github-backup && github-backup tomhoover --throttle-limit 100 --output-directory /Users/tom/data/software/python-github-backup/tomhoover --incremental --all-starred --repositories --fork --prefer-ssh --keychain-name python-github-backup --keychain-account tomhoover
 
 #
-30	22	*	*	*	/Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/sdautomatedcopycontroller file:///Users/tom/Library/Application\%20Support/SuperDuper\!/Scheduled\%20Copies/Smart\%20Update\%20c\%20from\%20a.sdsp
+30	01	*	*	0	/Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/sdautomatedcopycontroller file:///Users/tom/Library/Application\%20Support/SuperDuper\!/Scheduled\%20Copies/Smart\%20Update\%20SD\%20backup\%20from\%20a.sdsp
