@@ -13,10 +13,10 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbi
 
 @daily          python3 ~/.ansible/roles/proxmox/files/zfs-verify.py
 
-#@hourly         duplicacy-backup.sh
 @daily          getMovieList.sh
 @daily          updateHostsFile.sh runfromcron
 @daily          for dir in $HOME/Documents/FileThis\ Fetch/*/ ; do rmdir "${dir}" ; done
+@daily          restic-backup.sh
 @weekly         homebrewBackup_weekly.sh
 @weekly         rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
 
