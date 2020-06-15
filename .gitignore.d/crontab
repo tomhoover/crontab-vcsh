@@ -2,11 +2,8 @@
 !/.config
 !/.config/crontab
 !/.config/crontab/ariel.tom.crontab
-!/.config/crontab/bethel-crond
 !/.config/crontab/bethel.tom.crontab
-!/.config/crontab/gabriel-crond
 !/.config/crontab/lemuel.tom.crontab
-!/.config/crontab/proxmox-crond
 !/.config/crontab/unraid.tom.crontab
 !/.gitignore.d
 !/.gitignore.d/crontab
