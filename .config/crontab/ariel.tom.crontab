@@ -12,6 +12,7 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbi
 @monthly        zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank > /dev/null 2>&1
 
 @daily          python3 ~/.ansible/roles/proxmox/files/zfs-verify.py
+@daily          ansible APT -m apt -a update-cache=yes >/dev/null 2>&1 ; ansible APT -m shell -a "apt list --upgradeable"
 
 @daily          getMovieList.sh
 @daily          updateHostsFile.sh runfromcron
