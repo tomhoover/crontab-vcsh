@@ -1,9 +1,6 @@
 *
 !/.config
 !/.config/crontab
-!/.config/crontab/ariel.tom.crontab
-!/.config/crontab/bethel.tom.crontab
-!/.config/crontab/lemuel.tom.crontab
-!/.config/crontab/unraid.tom.crontab
+!/.config/crontab/*
 !/.gitignore.d
 !/.gitignore.d/crontab
