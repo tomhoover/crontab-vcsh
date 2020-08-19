@@ -4,10 +4,7 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbi
 
 # min hr dom mon dow command
 
-@daily          getMovieList.sh
-@daily          updateHostsFile.sh runfromcron
 @daily          for dir in $HOME/Documents/FileThis\ Fetch/*/ ; do rmdir "${dir}" ; done
-@daily          restic-backup.sh
 
 @weekly         homebrewBackup_weekly.sh
 @weekly         ~/.ansible/roles/user-config/files/get-grml-files.sh
@@ -28,6 +25,9 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbi
 # @weekly        ~/bin/rsyncBackup_weekly
 # 0 0 * * Mon,Wed,Fri cd ~/data/software/python-github-backup && github-backup tomhoover --throttle-limit 100 --output-directory /Users/tom/data/software/python-github-backup/tomhoover --incremental --all --gists --starred-gists --private --prefer-ssh --keychain-name python-github-backup --keychain-account tomhoover
 # 0 0 * * Tue,Thu,Sat cd ~/data/software/python-github-backup && github-backup tomhoover --throttle-limit 100 --output-directory /Users/tom/data/software/python-github-backup/tomhoover --incremental --all-starred --repositories --fork --prefer-ssh --keychain-name python-github-backup --keychain-account tomhoover
+# @daily          updateHostsFile.sh runfromcron
+# @daily          restic-backup.sh
+# @daily          getMovieList.sh
 
 ## ZFS snapshots
 # */15 * * * *    zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d tank      > /dev/null 2>&1
