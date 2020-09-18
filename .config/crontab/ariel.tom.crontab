@@ -4,6 +4,8 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbi
 
 # min hr dom mon dow command
 
+19 */6 * * *     duplicacy-backup.sh
+
 @daily          for dir in $HOME/Documents/FileThis\ Fetch/*/ ; do rmdir "${dir}" ; done
 
 @weekly         homebrewBackup_weekly.sh
