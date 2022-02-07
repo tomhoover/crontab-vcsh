@@ -4,9 +4,11 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbi
 
 # min hr dom mon dow command
 
-19 */6 * * *     duplicacy-backup.sh
+# 19 */6 * * *     duplicacy-backup.sh
 
-@daily          for dir in $HOME/Documents/FileThis\ Fetch/*/ ; do rmdir "${dir}" ; done
+# 0 5 * * *       ~/fin/hledger/hoover/bin/prices.sh
+# @daily          ~/src/backup_network_devices/backup-mikrotik.sh
+# @daily          for dir in $HOME/Documents/FileThis\ Fetch/*/ ; do rmdir "${dir}" ; done
 
 @weekly         homebrewBackup_weekly.sh
 @weekly         ~/.ansible/roles/user-config/files/get-grml-files.sh
