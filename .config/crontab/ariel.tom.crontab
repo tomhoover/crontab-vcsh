@@ -3,6 +3,7 @@ LC_ALL=en_US.UTF-8
 PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # min hr dom mon dow command
+# * * * * * env > /tmp/env.output
 
 # 19 */6 * * *     duplicacy-backup.sh
 
@@ -44,3 +45,4 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbi
 
 #
 30	01	*	*	0	/Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/sdautomatedcopycontroller file:///Users/tom/Library/Application\%20Support/SuperDuper\!/Scheduled\%20Copies/Smart\%20Update\%20SD\%20backup\%20from\%20a.sdsp
+

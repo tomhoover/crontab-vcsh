@@ -2,6 +2,7 @@ SHELL=/bin/bash
 PATH=/usr/local/bin:/bin:/usr/bin
 
 # min  hr  dom  mon  dow   command
+# * * * * * env > /tmp/env.output
 
 @weekly ~/bin/update-git-mirrors.sh
 @weekly dpkg --get-selections > ~/.config/apt/$HOSTNAME.package-selections
