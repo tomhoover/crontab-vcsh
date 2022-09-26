@@ -14,7 +14,7 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/
 @daily          ~/src/backup_network_devices/backup-mikrotik.sh
 # @daily          for dir in $HOME/Documents/FileThis\ Fetch/*/ ; do rmdir "${dir}" ; done
 
-@weekly         homebrewBackup_weekly.sh
+5 0 * * Sun     homebrewBackup_weekly.sh
 @weekly         ~/.ansible/roles/user-config/files/get-grml-files.sh
 @weekly         ansible APT -m apt -a update-cache=yes >/dev/null 2>&1 ; ansible APT -m shell -a "apt list --upgradeable"
 @weekly         rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
