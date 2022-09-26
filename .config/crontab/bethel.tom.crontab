@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 LC_ALL=en_US.UTF-8
-PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 # min hr dom mon dow command
 # * * * * * env > /tmp/env.output
@@ -43,7 +43,6 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/Users/tom/.pyenv/shims:/usr/local/sbi
 # @reboot         zfsnap.sh snapshot -rsSvz -p reboot-  -a 3m tank      > /dev/null 2>&1
 # @monthly        zfsnap.sh snapshot -rsSvz -p monthly- -a forever tank > /dev/null 2>&1
 # @daily          python3 ~/.ansible/roles/proxmox/files/zfs-verify.py
-
 
 #
 30	01	*	*	0	/Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/SDUtil -i || /Users/tom/Library/Application\ Support/SuperDuper\!/Scheduled\ Copies/sdautomatedcopycontroller file:///Users/tom/Library/Application\%20Support/SuperDuper\!/Scheduled\%20Copies/Smart\%20Update\%20SDbackup\%20from\%20a.sdsp
