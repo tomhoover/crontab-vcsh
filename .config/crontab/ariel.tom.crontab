@@ -11,6 +11,8 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/
 # @daily          ~/src/backup_network_devices/backup-mikrotik.sh
 # @daily          for dir in $HOME/Documents/FileThis\ Fetch/*/ ; do rmdir "${dir}" ; done
 
+@daily          ~/bin/rsyncBackup_daily.sh
+
 0 0 * * Sun     homebrewBackup_weekly.sh
 @weekly         ~/.ansible/roles/user-config/files/get-grml-files.sh
 @weekly         ansible APT -m apt -a update-cache=yes >/dev/null 2>&1 ; ansible APT -m shell -a "apt list --upgradeable"
