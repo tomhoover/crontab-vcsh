@@ -9,7 +9,6 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/
 0 5 * * *       curl -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/Downloads/fund-price-history.csv
 
 @daily          ~/bin/rdiff-backup.sh
-@daily          ~/bin/rsyncBackup_daily.sh
 @daily          ~/src/backup_network_devices/backup-mikrotik.sh
 
 5 0 * * Sun     homebrewBackup_weekly.sh
@@ -17,6 +16,7 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/
 @weekly         rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
 @weekly         ~/.ansible/roles/user-config/files/get-grml-files.sh
 @weekly         ~/bin/gh-backup.sh
+@weekly         ~/bin/rsync-backup.sh
 
 
 ##### old #####

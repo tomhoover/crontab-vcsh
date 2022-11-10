@@ -5,10 +5,10 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/
 # min hr dom mon dow command
 
 @daily          ~/bin/rdiff-backup.sh
-@daily          ~/bin/rsyncBackup_daily.sh
 
 0 0 * * Sun     homebrewBackup_weekly.sh
 @weekly         rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
+@weekly         ~/bin/rsync-backup.sh
 
 
 ##### old #####
