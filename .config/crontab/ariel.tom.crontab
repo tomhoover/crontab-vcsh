@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 LC_ALL=en_US.UTF-8
-PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/1.1.5/shims:/Users/tom/.pyenv/shims:/Users/tom/.pyenv/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 # min hr dom mon dow command
 

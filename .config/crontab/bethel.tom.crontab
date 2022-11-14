@@ -1,11 +1,12 @@
 SHELL=/bin/bash
 LC_ALL=en_US.UTF-8
-PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/1.1.5/shims:/Users/tom/.pyenv/shims:/Users/tom/.pyenv/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 # min hr dom mon dow command
 
 * * * * *       [ $HOME/Downloads/fund-price-history.csv -nt $HOME/Downloads/shareprices.csv ] && head -1 ~/Downloads/fund-price-history.csv | grep '^Date,L Income' >/dev/null 2>&1 && head -260 $HOME/Downloads/fund-price-history.csv > $HOME/Downloads/shareprices.csv
 * * * * *       vcsh obsidian add "*.md" 2>/dev/null
+0 */6 * * *     ~/bin/amazon-pricedrop.sh
 0 5 * * *       curl -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/Downloads/fund-price-history.csv
 
 @daily          ~/bin/rdiff-backup.sh
