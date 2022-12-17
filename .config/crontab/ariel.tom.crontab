@@ -4,6 +4,7 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 
 # min hr dom mon dow command
 
+30 */6 * * *    ~/bin/duplicacy-backup.sh
 @daily          ~/bin/rdiff-backup.sh
 
 0 0 * * Sun     homebrewBackup_weekly.sh
