@@ -4,12 +4,14 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 
 # min hr dom mon dow command
 
-30 */6 * * *    ~/bin/duplicacy-backup.sh
-@daily          ~/bin/rdiff-backup.sh
+30 */6 * * 1-6     ~/bin/duplicacy-backup.sh > /dev/null 2>&1
+@daily             ~/bin/rdiff-backup.sh
 
-0 0 * * Sun     homebrewBackup_weekly.sh
-@weekly         rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
-@weekly         ~/bin/rsync-backup.sh
+0 0 * * Sun        ~/bin/homebrewBackup_weekly.sh
+30 0,6,12 * * Sun  ~/bin/duplicacy-backup.sh > /dev/null 2>&1
+30 18 * * Sun      ~/bin/duplicacy-backup.sh check
+@weekly            rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
+@weekly            ~/bin/rsync-backup.sh
 
 
 ##### old #####
