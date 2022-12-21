@@ -9,7 +9,7 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 
 0 0 * * Sun        ~/bin/homebrewBackup_weekly.sh
 30 0,6,12 * * Sun  ~/bin/duplicacy-backup.sh > /dev/null 2>&1
-30 18 * * Sun      ~/bin/duplicacy-backup.sh check
+30 18 * * Sun      ~/bin/duplicacy-backup.sh
 @weekly            rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
 @weekly            ~/bin/rsync-backup.sh
 
