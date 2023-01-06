@@ -10,7 +10,6 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 0 5 * * *          curl -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/Downloads/fund-price-history.csv
 
 30 */6 * * 1-6     ~/bin/duplicacy-backup.sh > /dev/null 2>&1
-@daily             ~/bin/rdiff-backup.sh
 @daily             ~/src/backup_network_devices/backup-mikrotik.sh
 
 5 0 * * Sun        ~/bin/homebrewBackup_weekly.sh
