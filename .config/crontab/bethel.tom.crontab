@@ -4,23 +4,25 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 
 # min hr dom mon dow command
 
-* * * * *          vcsh obsidian add "*.md" 2>/dev/null
 * * * * *          [ $HOME/Downloads/fund-price-history.csv -nt $HOME/Downloads/shareprices.csv ] && head -1 ~/Downloads/fund-price-history.csv | grep '^Date,L Income' >/dev/null 2>&1 && head -260 $HOME/Downloads/fund-price-history.csv > $HOME/Downloads/shareprices.csv
-0 5 * * *          curl -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/Downloads/fund-price-history.csv
+0-58/2 * * * *     cd ~/Vault && git add "*.md" 2>/dev/null
+1-59/2 * * * *     cd ~/Vault && git commit -am "$(date '+\%Y-\%m-\%d \%H:\%M')" && git push origin
 
 @hourly            ~/bin/update-vultr-hosts.sh
 30 */6 * * 1-6     ~/bin/duplicacy-backup.sh > /dev/null 2>&1
+
 @daily             ~/bin/amazon-pricedrop.sh
 @daily             ~/src/backup_network_devices/backup-mikrotik.sh
+0 5 * * *          curl -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/Downloads/fund-price-history.csv
 
-5 0 * * Sun        ~/bin/homebrewBackup_weekly.sh
-30 0,6,12 * * Sun  ~/bin/duplicacy-backup.sh > /dev/null 2>&1
-00 19 * * Sun      ~/bin/duplicacy-backup.sh check
 @weekly            ansible APT -m apt -a update-cache=yes >/dev/null 2>&1 ; ansible APT -m shell -a "apt list --upgradeable"
 @weekly            rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
 @weekly            ~/.ansible/roles/user-config/files/get-grml-files.sh
 @weekly            ~/bin/gh-backup.sh
 @weekly            ~/bin/rsync-backup.sh
+5 0 * * Sun        ~/bin/homebrewBackup_weekly.sh
+30 0,6,12 * * Sun  ~/bin/duplicacy-backup.sh > /dev/null 2>&1
+00 19 * * Sun      ~/bin/duplicacy-backup.sh check
 
 
 ##### old #####
