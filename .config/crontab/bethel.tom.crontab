@@ -5,8 +5,8 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 # min hr dom mon dow command
 
 * * * * *          [ $HOME/Downloads/fund-price-history.csv -nt $HOME/Downloads/shareprices.csv ] && head -1 ~/Downloads/fund-price-history.csv | grep '^Date,L Income' >/dev/null 2>&1 && head -260 $HOME/Downloads/fund-price-history.csv > $HOME/Downloads/shareprices.csv
-0-59/5 * * * *     cd ~/Vault && git add "*.md" 2>/dev/null
-1-59/5 * * * *     cd ~/Vault && git commit -am "$(date '+\%Y-\%m-\%d \%H:\%M')" >/dev/null 2>&1 && git push origin
+0-59/5 * * * *     cd ~/Vault && git pull && git add "*.md" 2>/dev/null
+1-59/5 * * * *     cd ~/Vault && git pull && git commit -am "$(date '+\%Y-\%m-\%d \%H:\%M')" >/dev/null 2>&1 && git push origin
 
 @hourly            ~/bin/update-vultr-hosts.sh
 30 */6 * * 1-6     ~/bin/duplicacy-backup.sh > /dev/null 2>&1
