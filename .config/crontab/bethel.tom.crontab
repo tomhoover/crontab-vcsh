@@ -13,7 +13,6 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 @hourly            ~/bin/update-vultr-hosts.sh
 45 */6 * * 1-6     ~/bin/duplicacy-backup.sh > /dev/null 2>&1
 
-@daily             ~/bin/amazon-pricedrop.sh
 @daily             ~/src/backup_network_devices/backup-mikrotik.sh
 0 5 * * *          curl -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/Downloads/fund-price-history.csv
 
@@ -47,7 +46,8 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 # @daily          getMovieList.sh
 # @daily          restic-backup.sh
 # @daily          updateHostsFile.sh runfromcron
-# @weekly        ~/bin/rsyncBackup_weekly
+# @daily          ~/bin/amazon-pricedrop.sh
+# @weekly         ~/bin/rsyncBackup_weekly
 
 ## ZFS snapshots
 # */15 * * * *    zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d tank      > /dev/null 2>&1
