@@ -5,16 +5,14 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 # min hr dom mon dow command
 
 * * * * *          [ $HOME/Downloads/fund-price-history.csv -nt $HOME/Downloads/shareprices.csv ] && head -1 ~/Downloads/fund-price-history.csv | grep '^Date,L Income' >/dev/null 2>&1 && head -260 $HOME/Downloads/fund-price-history.csv > $HOME/Downloads/shareprices.csv
-0-59/5 * * * *     cd ~/Vault && git pull && git add "*.md" 2>/dev/null
+# 0-59/5 * * * *     cd ~/Vault && git pull && git add "*.md" 2>/dev/null
 # 1-59/5 * * * *     cd ~/Vault && git pull && git commit -am "$(date '+\%Y-\%m-\%d \%H:\%M')" >/dev/null 2>&1 && git push origin
-# 0-59/5 * * * *     ~/bin/vault.sh add
-# 1-59/5 * * * *     ~/bin/vault.sh commit
 
 @hourly            ~/bin/update-vultr-hosts.sh
 45 */6 * * 1-6     ~/bin/duplicacy-backup.sh > /dev/null 2>&1
 
 @daily             ~/src/backup_network_devices/backup-mikrotik.sh
-0 5 * * *          curl -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/Downloads/fund-price-history.csv
+0 5 * * *          curl -s -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/Downloads/fund-price-history.csv
 
 @weekly            ansible APT -m apt -a update-cache=yes >/dev/null 2>&1 ; ansible APT -m shell -a "apt list --upgradeable"
 @weekly            rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
