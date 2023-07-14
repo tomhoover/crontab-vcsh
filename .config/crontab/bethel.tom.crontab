@@ -1,43 +1,42 @@
 SHELL=/bin/bash
 LC_ALL=en_US.UTF-8
 PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/1.1.5/shims:/Users/tom/.pyenv/shims:/Users/tom/.pyenv/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+PYTHONWARNINGS="ignore:Unverified HTTPS request"
 
 # min hr dom mon dow command
 
 * * * * *          [ $HOME/Downloads/fund-price-history.csv -nt $HOME/Downloads/shareprices.csv ] && head -1 ~/Downloads/fund-price-history.csv | grep '^Date,L Income' >/dev/null 2>&1 && head -260 $HOME/Downloads/fund-price-history.csv > $HOME/Downloads/shareprices.csv
-# 0-59/5 * * * *     cd ~/Vault && git pull && git add "*.md" 2>/dev/null
-# 1-59/5 * * * *     cd ~/Vault && git pull && git commit -am "$(date '+\%Y-\%m-\%d \%H:\%M')" >/dev/null 2>&1 && git push origin
 
-@hourly            ~/bin/update-vultr-hosts.sh
 45 */6 * * 1-6     ~/bin/duplicacy-backup.sh > /dev/null 2>&1
 
 @daily             ~/bin/find-git-repos.sh && ~/bin/find-git-branches.sh
 @daily             ~/src/backup_network_devices/backup-mikrotik.sh
 0 5 * * *          curl -s -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/Downloads/fund-price-history.csv
 
-@weekly            ansible APT -m apt -a update-cache=yes >/dev/null 2>&1 ; ansible APT -m shell -a "apt list --upgradeable"
+5  0      * * Sun  ~/bin/homebrewBackup_weekly.sh
+45 0,6,12 * * Sun  ~/bin/duplicacy-backup.sh > /dev/null 2>&1
+45 18     * * Sun  ~/bin/duplicacy-backup.sh check
+@weekly            ansible 'APT:&proxmox_all_running' -m apt -a update-cache=yes ; ansible 'APT:&proxmox_all_running' -m shell -a "apt list --upgradeable"
 @weekly            rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
 @weekly            ~/.ansible/roles/user-config/files/get-grml-files.sh
 @weekly            ~/bin/gh-backup.sh
 @weekly            ~/bin/rsync-backup.sh
-5 0 * * Sun        ~/bin/homebrewBackup_weekly.sh
-45 0,6,12 * * Sun  ~/bin/duplicacy-backup.sh > /dev/null 2>&1
-45 18 * * Sun      ~/bin/duplicacy-backup.sh check
+@weekly            cat ~/.ssh/id_rsa.pub ~/.ssh/id_rsa_arch.pub ~/.ssh/id_rsa_ariel.pub ~/.ssh/id_rsa_bethel.pub ~/.ssh/id_rsa_theophilus.pub ~/.ssh/ansible_rsa.pub ~/.ssh/terraform_rsa.pub > ~/.ssh/authorized_keys.lxc
 
 
 ##### old #####
 
 # * * * * * env > /tmp/env.output
-# */5 * * * *    /usr/sbin/diskutil list | grep -e '.*RAID10.*' | sed 's/.*\(disk[0-9].*\)/\1/' | xargs -I{} /usr/sbin/diskutil mount {}
-# */5 * * * *    diskutil mount RAID10 > /dev/null 2>&1
-# */5 * * * *    touch /Volumes/RAID10/.nosleep > /dev/null 2>&1
-# 0 */6 * * *    ~/bin/amazon-pricedrop.sh
+# */5 * * * *     /usr/sbin/diskutil list | grep -e '.*RAID10.*' | sed 's/.*\(disk[0-9].*\)/\1/' | xargs -I{} /usr/sbin/diskutil mount {}
+# */5 * * * *     diskutil mount RAID10 > /dev/null 2>&1
+# */5 * * * *     touch /Volumes/RAID10/.nosleep > /dev/null 2>&1
+# 0 */6 * * *     ~/bin/amazon-pricedrop.sh
 # 0 0 * * Mon,Wed,Fri cd ~/data/software/python-github-backup && github-backup tomhoover --throttle-limit 100 --output-directory /Users/tom/data/software/python-github-backup/tomhoover --incremental --all --gists --starred-gists --private --prefer-ssh --keychain-name python-github-backup --keychain-account tomhoover
 # 0 0 * * Tue,Thu,Sat cd ~/data/software/python-github-backup && github-backup tomhoover --throttle-limit 100 --output-directory /Users/tom/data/software/python-github-backup/tomhoover --incremental --all-starred --repositories --fork --prefer-ssh --keychain-name python-github-backup --keychain-account tomhoover
-# 19 */6 * * *     duplicacy-backup.sh
-# 5 0 * * 0,2,4 ~/bin/sync-annex.sh content && ~/bin/sync-annex.sh fsck
-# 5 0 * * 1,3,5 ~/bin/sync-annex.sh content && ~/bin/sync-annex.sh fsck remotes
-# 5 0 * * 6    ~/bin/sync-annex.sh all
+# 19 */6 * * *    duplicacy-backup.sh
+# 5 0 * * 0,2,4   ~/bin/sync-annex.sh content && ~/bin/sync-annex.sh fsck
+# 5 0 * * 1,3,5   ~/bin/sync-annex.sh content && ~/bin/sync-annex.sh fsck remotes
+# 5 0 * * 6       ~/bin/sync-annex.sh all
 # @daily          for dir in $HOME/Documents/FileThis\ Fetch/*/ ; do rmdir "${dir}" ; done
 # @daily          for dir in $HOME/annex/*/ ; do cd "${dir}" && git annex list > "${dir%/}.txt" ; done
 # @daily          for dir in $HOME/annex/*/ ; do cd "${dir}" && git annex watch ; done
@@ -46,6 +45,7 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 # @daily          restic-backup.sh
 # @daily          updateHostsFile.sh runfromcron
 # @daily          ~/bin/amazon-pricedrop.sh
+# @hourly         ~/bin/update-vultr-hosts.sh
 # @weekly         ~/bin/rsyncBackup_weekly
 
 ## ZFS snapshots
