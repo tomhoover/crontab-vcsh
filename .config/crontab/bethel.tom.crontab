@@ -18,7 +18,7 @@ PYTHONWARNINGS="ignore:Unverified HTTPS request"
 5  0      * * Sun   ~/bin/homebrewBackup_weekly.sh
 45 0,6,12 * * Sun   ~/bin/duplicacy-backup.sh > /dev/null 2>&1
 45 18     * * Sun   ~/bin/duplicacy-backup.sh check
-@weekly             ansible 'APT:&proxmox_all_running' -m apt -a update-cache=yes ; ansible 'APT:&proxmox_all_running' -m shell -a "apt list --upgradeable"
+@weekly             ansible 'APT:&proxmox_all_running' --become -m apt -a update-cache=yes ; ansible 'APT:&proxmox_all_running' -m shell -a "apt list --upgradeable"
 @weekly             rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
 @weekly             ~/.ansible/roles/user-config/files/get-grml-files.sh
 @weekly             ~/bin/gh-backup.sh
