@@ -4,20 +4,20 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 
 # min hr dom mon dow command
 
-0-59/5 * * * *      ~/bin/vault.sh | grep -v 'Already up to date.'
+0-59/5 * * * *      ~/bin/vault.sh | grep -v 'Already up to date.'                              && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/f03f449b-b539-4932-ba19-3d6dcf712efb
 
-30 */6 * * 1-6      ~/bin/duplicacy-backup.sh > /dev/null 2>&1
+30 */6 * * 1-6      ~/bin/duplicacy-backup.sh > /dev/null 2>&1                                  && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/5c547045-02e1-4e9e-bbe2-4795714f5b69
+30 0,6,12 * * Sun   ~/bin/duplicacy-backup.sh > /dev/null 2>&1                                  && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/5c547045-02e1-4e9e-bbe2-4795714f5b69
+30 18     * * Sun   ~/bin/duplicacy-backup.sh                                                   && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/5c547045-02e1-4e9e-bbe2-4795714f5b69
 
 @daily              find ~/.ansible/inventory -name '*.tmp' -type f -mtime +7 -delete
 @daily              find ~/.ssh/config.d      -name '*.tmp' -type f -mtime +7 -delete
-@daily              ~/bin/find-git-repos.sh && ~/bin/find-git-branches.sh
+@daily              ~/bin/find-git-repos.sh && ~/bin/find-git-branches.sh                       && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/a45000b8-3d90-45a8-8a94-6434ff9e6daf
 
-0  0      * * Sun   ~/bin/homebrewBackup_weekly.sh
-30 0,6,12 * * Sun   ~/bin/duplicacy-backup.sh > /dev/null 2>&1
-30 18     * * Sun   ~/bin/duplicacy-backup.sh
-@weekly             rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
-@weekly             ~/bin/rsync-backup.sh
-@weekly             cat ~/.ssh/id_rsa.pub ~/.ssh/id_rsa_arch.pub ~/.ssh/id_rsa_ariel.pub ~/.ssh/id_rsa_bethel.pub ~/.ssh/id_rsa_theophilus.pub ~/.ssh/ansible_rsa.pub ~/.ssh/terraform_rsa.pub > ~/.ssh/authorized_keys.lxc
+0  0      * * Sun   ~/bin/homebrewBackup_weekly.sh                                              && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/743f04e0-08c4-4e42-87d5-be9ea8a0b077
+@weekly             rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring                                                                                                                                    && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/e0b91afd-bb20-47bd-981c-367b5f939fb9
+@weekly             ~/bin/rsync-backup.sh                                                       && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/dd051a2d-243c-4180-ae43-81daf885b04d
+@weekly             cat ~/.ssh/id_rsa.pub ~/.ssh/id_rsa_arch.pub ~/.ssh/id_rsa_ariel.pub ~/.ssh/id_rsa_bethel.pub ~/.ssh/id_rsa_theophilus.pub ~/.ssh/ansible_rsa.pub ~/.ssh/terraform_rsa.pub > ~/.ssh/authorized_keys.lxc                                                                                   && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/55824bd5-fc83-4066-a700-fd4a1aabccb9
 
 
 ##### old #####

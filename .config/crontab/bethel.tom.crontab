@@ -7,23 +7,23 @@ PYTHONWARNINGS="ignore:Unverified HTTPS request"
 
 * * * * *           [ $HOME/Downloads/fund-price-history.csv -nt $HOME/Downloads/shareprices.csv ] && head -1 ~/Downloads/fund-price-history.csv | grep '^Date,L Income' >/dev/null 2>&1 && head -260 $HOME/Downloads/fund-price-history.csv > $HOME/Downloads/shareprices.csv
 
-45 */6 * * 1-6      ~/bin/duplicacy-backup.sh > /dev/null 2>&1
+45 */6 * * 1-6      ~/bin/duplicacy-backup.sh > /dev/null 2>&1                                  && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/16072c36-bb9b-422d-a39a-1a4541459675
+45 0,6,12 * * Sun   ~/bin/duplicacy-backup.sh > /dev/null 2>&1                                  && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/16072c36-bb9b-422d-a39a-1a4541459675
+45 18     * * Sun   ~/bin/duplicacy-backup.sh check                                             && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/16072c36-bb9b-422d-a39a-1a4541459675
 
 @daily              find ~/.ansible/inventory -name '*.tmp' -type f -mtime +7 -delete
 @daily              find ~/.ssh/config.d      -name '*.tmp' -type f -mtime +7 -delete
-@daily              ~/bin/find-git-repos.sh && ~/bin/find-git-branches.sh
-@daily              ~/src/backup_network_devices/backup-mikrotik.sh
+@daily              ~/bin/find-git-repos.sh && ~/bin/find-git-branches.sh                       && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/cac00129-c045-431e-a3bc-f663be5ffad6
+@daily              ~/src/backup_network_devices/backup-mikrotik.sh                             && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/114bc18f-a8c6-46be-8846-b47390f4bb9f
 0 5 * * *           curl -s -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/Downloads/fund-price-history.csv
 
-5  0      * * Sun   ~/bin/homebrewBackup_weekly.sh
-45 0,6,12 * * Sun   ~/bin/duplicacy-backup.sh > /dev/null 2>&1
-45 18     * * Sun   ~/bin/duplicacy-backup.sh check
-@weekly             ansible 'APT:&proxmox_all_running' --become -m apt -a update-cache=yes ; ansible 'APT:&proxmox_all_running' -m shell -a "apt list --upgradeable"
-@weekly             rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
-@weekly             ~/.ansible/roles/user-config/files/get-grml-files.sh
-@weekly             ~/bin/gh-backup.sh
-@weekly             ~/bin/rsync-backup.sh
-@weekly             cat ~/.ssh/id_rsa.pub ~/.ssh/id_rsa_arch.pub ~/.ssh/id_rsa_ariel.pub ~/.ssh/id_rsa_bethel.pub ~/.ssh/id_rsa_theophilus.pub ~/.ssh/ansible_rsa.pub ~/.ssh/terraform_rsa.pub > ~/.ssh/authorized_keys.lxc
+5  0      * * Sun   ~/bin/homebrewBackup_weekly.sh                                              && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/8409e72f-e52c-4a6d-a965-74b0fab4529c
+@weekly             ansible 'APT:&proxmox_all_running' --become -m apt -a update-cache=yes ; ansible 'APT:&proxmox_all_running' -m shell -a "apt list --upgradeable"                                                                                                                                          && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/e69ddbf0-cce7-47a4-be86-429e4577b272
+@weekly             rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring                                                                                                                                    && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/f2a64f04-ddea-4292-a23c-aeaf3ec89b0a
+@weekly             ~/.ansible/roles/user-config/files/get-grml-files.sh                        && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/c26a98d3-a54c-457c-a23a-36611e06bc4b
+@weekly             ~/bin/gh-backup.sh                                                          && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/2d33a1fa-793b-4c88-a7a8-5833c641852f
+@weekly             ~/bin/rsync-backup.sh                                                       && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/968da254-52a2-42a2-a8d1-d304dbe04571
+@weekly             cat ~/.ssh/id_rsa.pub ~/.ssh/id_rsa_arch.pub ~/.ssh/id_rsa_ariel.pub ~/.ssh/id_rsa_bethel.pub ~/.ssh/id_rsa_theophilus.pub ~/.ssh/ansible_rsa.pub ~/.ssh/terraform_rsa.pub > ~/.ssh/authorized_keys.lxc                                                                                   && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/fdf9ec42-2e03-46ae-ab92-28bcee10b38c
 
 
 ##### old #####
