@@ -4,9 +4,9 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 
 # min hr dom mon dow command
 
-0-59/5 * * * *      ~/bin/vault.sh                                                     && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/f03f449b-b539-4932-ba19-3d6dcf712efb
+0-59/5 * * * *      ~/bin/vault.sh                                                     && curl -fs            -o /dev/null http://healthchecks.t0m.us:8000/ping/f03f449b-b539-4932-ba19-3d6dcf712efb
 
-0 7-21 * * *        /bin/ls ~/.ansible/TODO.* && cd ~/.ansible/ && ls -x TODO.* | ~/bin/pushover.sh
+0 7-21 * * *        /bin/ls ~/.ansible/TODO.* 2> /dev/null && cd ~/.ansible/ && ls -x TODO.* | ~/bin/pushover.sh
 
 30 */6 * * 1-6      ~/bin/duplicacy-backup.sh > /dev/null 2>&1                         && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/5c547045-02e1-4e9e-bbe2-4795714f5b69
 30 0,6,12 * * Sun   ~/bin/duplicacy-backup.sh > /dev/null 2>&1                         && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/5c547045-02e1-4e9e-bbe2-4795714f5b69
