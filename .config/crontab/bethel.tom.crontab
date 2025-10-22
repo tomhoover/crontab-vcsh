@@ -5,6 +5,8 @@ PYTHONWARNINGS="ignore:Unverified HTTPS request"
 
 # min hr dom mon dow command
 
+* * * * *           [ tailscale status ] || tailscale up
+
 45 */6 * * 1-6      ~/bin/duplicacy-backup.sh > /dev/null 2>&1                         && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/16072c36-bb9b-422d-a39a-1a4541459675
 45 0,6,12 * * Sun   ~/bin/duplicacy-backup.sh > /dev/null 2>&1                         && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/16072c36-bb9b-422d-a39a-1a4541459675
 45 18     * * Sun   ~/bin/duplicacy-backup.sh check                                    && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/16072c36-bb9b-422d-a39a-1a4541459675
