@@ -13,6 +13,7 @@ PYTHONWARNINGS="ignore:Unverified HTTPS request"
 
 @daily              find ~/.ansible/inventory -name '*.tmp' -type f -mtime +7 -delete
 @daily              find ~/.ssh/config.d      -name '*.tmp' -type f -mtime +7 -delete
+@daily              ~/bin/backup-docker.sh
 @daily              ~/bin/find-git-repos.sh && ~/bin/find-git-branches.sh              && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/cac00129-c045-431e-a3bc-f663be5ffad6
 @daily              ~/src/backup_network_devices/backup-mikrotik.sh                    && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/114bc18f-a8c6-46be-8846-b47390f4bb9f
 0 5 * * *           curl -s -H "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36" https://www.tsp.gov/data/fund-price-history.csv > $HOME/dl/fund-price-history.csv
