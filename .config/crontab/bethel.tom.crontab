@@ -14,6 +14,7 @@ PYTHONWARNINGS="ignore:Unverified HTTPS request"
 @daily              find ~/.ansible/inventory -name '*.tmp' -type f -mtime +7 -delete
 @daily              find ~/.ssh/config.d      -name '*.tmp' -type f -mtime +7 -delete
 @daily              ~/bin/backup-docker.sh
+@daily              ~/bin/backup-podman.sh
 @daily              ~/bin/find-git-repos.sh && ~/bin/find-git-branches.sh              && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/cac00129-c045-431e-a3bc-f663be5ffad6
 @daily              ~/src/backup_network_devices/backup-mikrotik.sh                    && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/114bc18f-a8c6-46be-8846-b47390f4bb9f
 @daily              ~/bin/rsync-backup.sh                                              && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/968da254-52a2-42a2-a8d1-d304dbe04571

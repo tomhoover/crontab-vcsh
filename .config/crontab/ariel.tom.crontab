@@ -18,6 +18,7 @@ PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/
 @daily              find ~/.ansible/inventory -name '*.tmp' -type f -mtime +7 -delete
 @daily              find ~/.ssh/config.d      -name '*.tmp' -type f -mtime +7 -delete
 @daily              ~/bin/backup-docker.sh
+@daily              ~/bin/backup-podman.sh
 @daily              ~/bin/find-git-repos.sh && ~/bin/find-git-branches.sh              && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/a45000b8-3d90-45a8-8a94-6434ff9e6daf
 @daily              ~/bin/rsync-backup.sh                                              && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/dd051a2d-243c-4180-ae43-81daf885b04d
 
