@@ -4,7 +4,7 @@ PATH=/usr/local/bin:/bin:/usr/bin
 # min  hr  dom  mon  dow   command
 # * * * * * env > /tmp/env.output
 
-@weekly ~/bin/update-git-mirrors.sh
-@weekly dpkg --get-selections > ~/.config/apt/$HOSTNAME.package-selections
-@weekly rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* ~/.debian-keyring
+@weekly $HOME/bin/update-git-mirrors.sh
+@weekly dpkg --get-selections > $HOME/.config/apt/$HOSTNAME.package-selections
+@weekly rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* $HOME/.debian-keyring
 
