@@ -6,7 +6,7 @@ PYTHONWARNINGS="ignore:Unverified HTTPS request"
 # min hr dom mon dow command
 
 0 0 * * *           echo > $HOME/tmp/crontab.log 2>&1
-* * * * *           $HOME/bin/backup-podman.sh >> $HOME/tmp/crontab.log 2>&1
+# * * * * *           $HOME/bin/backup-podman.sh >> $HOME/tmp/crontab.log 2>&1
 * * * * *           [ tailscale status ] || tailscale up
 
 45 */6 * * 1-6      $HOME/bin/duplicacy-backup.sh > /dev/null 2>&1                         && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/16072c36-bb9b-422d-a39a-1a4541459675
