@@ -1,10 +1,11 @@
 SHELL=/bin/bash
 LC_ALL=en_US.UTF-8
-PATH=/Users/tom/bin:/Users/tom/.local/bin:/opt/homebrew/Cellar/pyenv-virtualenv/1.1.5/shims:/Users/tom/.pyenv/shims:/Users/tom/.pyenv/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+PATH=/Users/tom/bin:/Users/tom/.local/share/mise/shims:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/tom/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 
 # min hr dom mon dow command
 
 0 0 * * *           echo > $HOME/tmp/crontab.log 2>&1
+# * * * * *           echo "$PATH" >> $HOME/tmp/crontab.log 2>&1
 # * * * * *           $HOME/bin/backup-podman.sh >> $HOME/tmp/crontab.log 2>&1
 5 * * * *           tailscale status || tailscale up
 * * * * *           [ $HOME/dl/fund-price-history.csv -nt $HOME/dl/shareprices.csv ] && head -1 $HOME/dl/fund-price-history.csv | grep '^Date,L Income' >/dev/null 2>&1 && head -260 $HOME/dl/fund-price-history.csv > $HOME/dl/shareprices.csv
