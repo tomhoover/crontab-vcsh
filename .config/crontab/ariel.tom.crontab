@@ -28,6 +28,7 @@ PATH=/Users/tom/bin:/Users/tom/.local/share/mise/shims:/opt/homebrew/bin:/opt/ho
 0  0      * * Sun   $HOME/bin/homebrewBackup_weekly.sh                      && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/743f04e0-08c4-4e42-87d5-be9ea8a0b077
 @weekly             rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* $HOME/.debian-keyring                                                                                     && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/e0b91afd-bb20-47bd-981c-367b5f939fb9
 @weekly             cat $HOME/.ssh/id_rsa.pub $HOME/.ssh/id_rsa_arch.pub $HOME/.ssh/id_rsa_ariel.pub $HOME/.ssh/id_rsa_bethel.pub $HOME/.ssh/id_rsa_theophilus.pub $HOME/.ssh/ansible_rsa.pub $HOME/.ssh/terraform_rsa.pub > $HOME/.ssh/authorized_keys.lxc        && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/55824bd5-fc83-4066-a700-fd4a1aabccb9
+@weekly             $HOME/.ansible/roles/user-config/files/get-grml-files.sh
 
 
 ##### old #####
@@ -53,7 +54,6 @@ PATH=/Users/tom/bin:/Users/tom/.local/share/mise/shims:/opt/homebrew/bin:/opt/ho
 # @daily              ~/bin/rsyncBackup_daily
 # @daily              ~/src/backup_network_devices/backup-mikrotik.sh
 # @weekly             ansible APT -m apt -a update-cache=yes >/dev/null 2>&1 ; ansible APT -m shell -a "apt list --upgradeable"
-# @weekly             ~/.ansible/roles/user-config/files/get-grml-files.sh
 # @weekly             ~/bin/rsyncBackup_weekly
 
 ## ZFS snapshots

@@ -27,7 +27,6 @@ PYTHONWARNINGS="ignore:Unverified HTTPS request"
 5  0      * * Sun   $HOME/bin/homebrewBackup_weekly.sh                  && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/8409e72f-e52c-4a6d-a965-74b0fab4529c
 @weekly             ansible 'APT:&proxmox_all_running' --become -m apt -a update-cache=yes ; ansible 'APT:&proxmox_all_running' -m shell -a "apt list --upgradeable"                                                                                           && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/e69ddbf0-cce7-47a4-be86-429e4577b272
 @weekly             rsync -qcltz --block-size=8192 --partial --progress --exclude=emeritus-* --exclude=removed-* keyring.debian.org::keyrings/keyrings/* $HOME/.debian-keyring                                                                                 && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/f2a64f04-ddea-4292-a23c-aeaf3ec89b0a
-@weekly             $HOME/.ansible/roles/user-config/files/get-grml-files.sh && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/c26a98d3-a54c-457c-a23a-36611e06bc4b
 @weekly             $HOME/bin/gh-backup.sh                              && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/2d33a1fa-793b-4c88-a7a8-5833c641852f
 @weekly             cat $HOME/.ssh/id_rsa.pub $HOME/.ssh/id_rsa_arch.pub $HOME/.ssh/id_rsa_ariel.pub $HOME/.ssh/id_rsa_bethel.pub $HOME/.ssh/id_rsa_theophilus.pub $HOME/.ssh/ansible_rsa.pub $HOME/.ssh/terraform_rsa.pub > $HOME/.ssh/authorized_keys.lxc    && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/fdf9ec42-2e03-46ae-ab92-28bcee10b38c
 
@@ -55,6 +54,7 @@ PYTHONWARNINGS="ignore:Unverified HTTPS request"
 # @daily              ~/bin/amazon-pricedrop.sh
 # @hourly             ~/bin/update-vultr-hosts.sh
 # @weekly             ~/bin/rsyncBackup_weekly
+# @weekly             $HOME/.ansible/roles/user-config/files/get-grml-files.sh && curl -fsS --retry 5 -o /dev/null http://healthchecks.t0m.us:8000/ping/c26a98d3-a54c-457c-a23a-36611e06bc4b
 
 ## ZFS snapshots
 # */15 * * * *    zfsnap.sh snapshot -rsSvz -p 15min-   -a 3d tank      > /dev/null 2>&1
